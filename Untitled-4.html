@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赤峰印象 - 塞外明珠 · 魅力之旅</title>
+    <style>
+        /* --- 1. 核心配色与字体 --- */
+        :root {
+            --red: #a12d1a;    /* 经典红山红 */
+            --green: #3a5a3a;  /* 深邃草原绿 */
+            --gold: #b2945d;   /* 历史金 */
+            --bg: #fdfdfb;     /* 复古纸张白 */
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #f0f0f0;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        body { 
+            margin: 0; padding: 0; 
+            font-family: "Microsoft YaHei", "PingFang SC", "SimSun", serif; 
+            background-color: var(--bg); color: var(--dark);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 2. 导航栏 --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            padding: 20px 8%; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 26px; font-weight: 900; color: var(--red); letter-spacing: 2px; }
+        .nav-links a { margin-left: 30px; font-size: 14px; font-weight: bold; color: var(--gray); }
+        .nav-links a:hover { color: var(--red); }
+
+        /* --- 3. 沉浸式海报 --- */
+        .hero {
+    height: 100vh;
+
+    background:
+        linear-gradient(135deg, rgba(161,45,26,0.45), rgba(0,0,0,0.55)),
+        url("image_bg.jpg") center/cover no-repeat;
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    text-align: center;
+}
+        .hero h1 { font-size: 80px; margin: 0; font-weight: 900; letter-spacing: 15px; }
+        .hero p { font-size: 24px; margin-top: 20px; letter-spacing: 8px; opacity: 0.9; }
+        .scroll-down { margin-top: 50px; font-size: 30px; animation: bounce 2s infinite; }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+        /* --- 4. 整体内容容器 --- */
+ .container {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 60px;
+    box-sizing: border-box;
+}
+
+        /* --- 5. 文明之魂 (重点排版) --- */
+        .culture-intro {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            align-items: center; margin-bottom: 100px;
+        }
+        .culture-text h2 { font-size: 42px; color: var(--red); margin-bottom: 20px; border-bottom: 3px solid var(--red); display: inline-block; }
+        .culture-text p { font-size: 16px; line-height: 2; color: var(--gray); margin-bottom: 20px; }
+        .culture-image { position: relative; }
+        .culture-image img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0 var(--light-gray); }
+        .culture-badge { 
+            position: absolute; -left: 20px; -top: 20px;
+            background: var(--red); color: white; padding: 15px 25px;
+            font-weight: bold; font-size: 18px; border-radius: 30px;
+        }
+
+        /* --- 6. 风光磁贴 (精致网格) --- */
+        .grid-section { margin-top: 100px; }
+        .grid-header { text-align: center; margin-bottom: 50px; }
+        .grid-header h2 { font-size: 36px; letter-spacing: 5px; }
+        .grid-layout { 
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; 
+            grid-template-rows: repeat(2, 220px);
+        }
+        .bento-card { 
+            background: white; border-radius: 16px; padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+            display: flex; flex-direction: column; justify-content: space-between;
+            border-top: 5px solid var(--light-gray);
+        }
+        .bento-card:hover { border-top-color: var(--gold); transform: translateY(-8px); }
+        
+        /* 布局控制 */
+        .col-2 { grid-column: span 2; }
+        .row-2 { grid-row: span 2; }
+        
+        .bento-card h3 { margin: 0; font-size: 22px; color: var(--dark); }
+        .bento-card p { font-size: 14px; color: var(--gray); margin-top: 10px; }
+        .bento-card .icon { font-size: 40px; margin-bottom: 15px; }
+
+        /* --- 7. 美食 & 体验 (列表排版) --- */
+        .food-section { 
+            background: #fff; margin-top: 100px; padding: 60px;
+            border-radius: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+        }
+        .food-list { list-style: none; padding: 0; }
+        .food-item { 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 1px dashed #ddd; 
+        }
+        .food-item span.title { font-weight: bold; font-size: 18px; }
+        .food-item span.tag { font-size: 12px; background: var(--light-gray); padding: 2px 8px; border-radius: 4px; color: var(--gold); }
+
+        /* --- 8. 季节指南表 --- */
+        .season-guide { margin-top: 100px; }
+        .season-table {
+            width: 100%; border-collapse: collapse; background: white;
+            border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .season-table th { background: var(--green); color: white; padding: 25px; text-align: left; }
+        .season-table td { padding: 20px 25px; border-bottom: 1px solid #f9f9f9; }
+        .season-table tr:hover { background: #fdfaf0; }
+
+        /* --- 9. 页脚 --- */
+        footer {
+            background: #111; color: #777; padding: 80px 0 40px; margin-top: 150px;
+        }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 0 20px;
+        }
+        .footer-grid h4 { color: white; margin-bottom: 25px; }
+        .footer-grid p { font-size: 13px; line-height: 1.8; }
+        .copyright { text-align: center; padding-top: 50px; margin-top: 50px; border-top: 1px solid #222; font-size: 12px; }
+
+        /* 移动端 */
+        @media (max-width: 900px) {
+            .culture-intro, .grid-layout, .food-section, .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 46px; }
+            .col-2, .row-2 { grid-column: auto; grid-row: auto; }
+        }
+		
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">赤峰印象</div>
+        <div class="nav-links">
+            <a href="#landscape">风光</a>
+            <a href="#history">历史</a>
+            <a href="#food">美食</a>
+            <a href="#guide">指南</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>魅力赤峰</h1>
+        <p>山海之外的塞外明珠 · 中华文明的曙光</p>
+        <div class="scroll-down">↓</div>
+    </header>
+    ><div class="container">
+        
+        <!-- 版块一：核心简介 -->
+        <section class="container culture-intro" id="history">
+            <div class="culture-image">
+                <div class="culture-badge">文明起源</div>
+                <img src="https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?q=80&w=800" alt="赤峰文化">
+            </div>
+            <div class="culture-text">
+                <h2>红山文化 · 龙的故乡</h2>
+                <p>赤峰，是红山文化的发祥地。这里有着长达8000年的文明史，是当之无愧的“中华第一龙”故乡。在这里，历史不再是尘封的文字，而是流淌在红山顶上的风，是三星他拉玉龙苍劲的脊梁。</p>
+                <p>作为蒙汉结合部，赤峰更是草原丝绸之路的重要节点。契丹辽王朝曾在此建都，见证了北方马背民族最辉煌的三百载春秋。</p>
+            </div>
+        </section>
+
+        <!-- 版块二：风光磁贴 (增强布局) -->
+        <section class="container grid-section" id="landscape">
+            <div class="grid-header">
+                <h2>山河壮丽 · 塞外明珠</h2>
+            </div>
+            <div class="grid-layout">
+                <!-- 第一张：大图 -->
+                <div class="bento-card col-2 row-2" style="background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600') center; color:white; border:none; background-size: cover;">
+                    <span class="badge" style="background:var(--gold); border:none; color:white;">顶级推介</span>
+                    <div>
+                        <h3>乌兰布通草原</h3>
+                        <p style="color:#eee">这里是摄影家的朝圣地，起伏的线条与白桦林构成了最完美的草原视觉大片。也是康熙平息叛乱的古战场。</p>
+                    </div>
+                </div>
+
+                <!-- 第二张：冰川 -->
+                <div class="bento-card">
+                    <div class="icon">⛰️</div>
+                    <div>
+                        <h3>阿斯哈图石林</h3>
+                        <p>大地的卫士。第四纪冰川留下的地质奇迹，在平坦的山脊上突兀而起，形态万千。</p>
+                    </div>
+                </div>
+
+                <!-- 第三张：湖泊 -->
+                <div class="bento-card">
+                    <div class="icon">🦢</div>
+                    <div>
+                        <h3>达里诺尔湖</h3>
+                        <p>被称为“百鸟乐园”的半咸水湖，是亚洲重要的高原湿地，每年候鸟迁徙蔚为壮观。</p>
+                    </div>
+                </div>
+
+                <!-- 第四张：横向(文化专题) -->
+                <div class="bento-card col-2">
+                    <div class="icon">🎎</div>
+                    <div>
+                        <h3>民俗那达慕</h3>
+                        <p>每年夏秋，草原子民汇聚于此，赛马、摔跤、射箭，感受跨越千年的自由意志与竞技热情。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 版块三：美食清单 -->
+        <section class="container food-section" id="food">
+            <div>
+                <h2 style="font-size:32px; color:var(--red);">舌尖上的赤峰</h2>
+                <p style="color:#666;">赤峰的味道，是蒙汉文化撞击融合出的诱人咸香。从街头的热乎对夹，到草原深处的手把肉，每一口都是惊喜。</p>
+                <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?q=80&w=400" style="width:100%; border-radius:20px; margin-top:20px;">
+            </div>
+            <div>
+                <ul class="food-list">
+                    <li class="food-item">
+                        <span class="title">赤峰对夹</span>
+                        <span class="tag">非遗小吃</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">满火烧</span>
+                        <span class="tag">清真风味</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">手把羊肉</span>
+                        <span class="tag">草原纯味</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">蒙古奶茶</span>
+                        <span class="tag">咸香浓醇</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">察干伊德 (奶豆腐)</span>
+                        <span class="tag">蒙古语:白食</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">达里湖华子鱼</span>
+                        <span class="tag">高原冷水鱼</span>
+                    </li>
+                    <li class="food-item">
+                        <span class="title">荞麦饸饹</span>
+                        <span class="tag">低卡健康</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 版块四：旅行指南 -->
+        <section class="container season-guide" id="guide">
+            <h2 style="text-align:center; font-size:32px; margin-bottom:50px;">赤峰 · 四季旅行表</h2>
+            <table class="season-table">
+                <thead>
+                    <tr>
+                        <th>时段</th>
+                        <th>景色</th>
+                        <th>必游体验</th>
+                        <th>推荐指数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>春 (4-5月)</b></td>
+                        <td>嫩绿草原，玉兰初绽</td>
+                        <td>达里湖祭湖，摄影春季迁徙候鸟</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><b>夏 (6-8月)</b></td>
+                        <td>碧草连天，凉爽怡人</td>
+                        <td>乌兰布通策马，感受草原之夏的狂欢</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><b>秋 (9-10月)</b></td>
+                        <td>层林尽染，遍地金黄</td>
+                        <td>白桦林摄影，克什克腾石阵云海</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><b>冬 (11-3月)</b></td>
+                        <td>林海雪原，银装素裹</td>
+                        <td>感受零下30度的冰雪那达慕，冬捕奇观</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col" style="grid-column: span 2;">
+                <h4 style="font-size: 24px;">赤峰印象 · Chifeng</h4>
+                <p>赤峰不仅是一个地理名词，它是八千年岁月的沉淀，是长城内外民族融合的见证，更是现代都市快节奏下的心灵避风港。诚邀全球旅客，共赴这场草原与历史的约会。</p>
+            </div>
+            <div class="footer-col">
+                <h4>分类浏览</h4>
+                <p>自然风景区</p><p>人文历史馆</p><p>特色餐厅推荐</p><p>酒店预订指南</p>
+            </div>
+            <div class="footer-col">
+                <h4>联系我</h4>
+                <p>📍 地址：赤峰市松山区</p>
+                <p>📞 电话：15049976422</p>
+                <p>📧 邮箱：xiaoduan77@outlook.com</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 11px; opacity: 0.5;">
+            © 2026 魅力赤峰 | 本页面由小段同学制作</div></footer>
+
+</body>
+</html>
